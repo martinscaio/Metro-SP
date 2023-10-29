@@ -27,4 +27,70 @@ Para mapear a evolução das inaugurações das estações de metrô é necessá
 
 Confesso que não encontrei em dados públicos do governo ambas as informações. A solução utilizada aqui foi raspar as informações do site do Wikipedia. O Wikipedia tem uma página que mostra [todas as estações](https://pt.wikipedia.org/wiki/Categoria:Estações_do_Metrô_de_São_Paulo), até mesmo futuras, da cidade de São Paulo. Fiz um Scrapper pra coletar o nome dessas estações, o link da página de cada estação, a data de inauguração e o endereço. Não irei explicar nem demonstrar aqui como fazer isso, mas caso queira dar uma olhada pode acessar o repositório no Github.
 
-Todo o processo desde a raspagem de dados até a plotagem foi feita utilizando R.
+Todo o processo desde a raspagem de dados até a plotagem foi feita utilizando o R e suas dependências.
+
+## Análise Espacial
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE}
+
+library(tidyverse)
+library(tidygeocoder)
+library(leaflet)
+library(gganimate)
+library(ggthemes)
+library(osmdata)
+library(forcats)
+library(OpenStreetMap)
+library(latex2exp)
+
+lat_longs <- read_csv2("C:\\Users\\Caio\\Desktop\\Projeto Metro SP\\dados_prontosQUARTO.csv")
+
+
+upperLeft <- c(-23.4190,-46.8058)
+lowerRight <- c(-23.7327,-46.4527)
+
+map <- openmap(upperLeft=upperLeft,
+               lowerRight=lowerRight,
+               type="osm", zoom = 12)
+
+
+
+map2 <- openproj(map)
+
+
+
+lat_longs$id_estacao <- paste(lat_longs$ano, lat_longs$Estacao)
+
+
+
+# scale 3 zoom 13
+mapa_osm <- OpenStreetMap::autoplot.OpenStreetMap(map2, scale = 3, zoom = 13) +
+  geom_point(data = lat_longs,aes(x = lon, y = lat, group = id_estacao),
+             alpha = 0.6,
+             size = 5,
+             color = '#6260EE')+
+  labs(
+    title = "",
+    subtitle = "Ano: {next_state}",
+    x= "",
+    y= "") +
+  cowplot::theme_cowplot(font_family = "Source Sans Pro",
+                         font_size = 12) +
+  theme(legend.position = "none",
+        axis.title = element_text(size = 18, hjust = 0.5),
+        plot.title = element_text(size = 26, hjust = 0.5),
+        plot.subtitle = element_text(size = 22, hjust = 0.5),
+        plot.margin = margin(5, 5, 5, 5),
+        axis.text = element_blank()) +
+  transition_states(id_estacao) +
+  ease_aes('linear')+
+  shadow_mark(color="black")
+
+
+
+
+animate(mapa_osm, fps = 1,height = 3500, width = 3500,res = 250, renderer = gifski_renderer("metro.gif"))
+
+
+
+```
