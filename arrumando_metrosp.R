@@ -85,9 +85,10 @@ lat_longs <- lat_longs %>% mutate(lat = ifelse(round(lat,5) == -23.66376, -23.65
 
 
 
+write_excel_csv2(lat_longs,"C:\\Users\\Caio\\Desktop\\Projeto Metro SP\\dados_prontosQUARTO.csv")
 
 
-
+lat_longs <- read_csv2("C:\\Users\\Caio\\Desktop\\Projeto Metro SP\\dados_prontosQUARTO.csv")
 
 
 # Analises
@@ -136,17 +137,22 @@ dados_eleicoes %>%
   group_by(eleicao) %>% 
   summarise(lancamentos = sum(n)) %>% 
   ggplot(aes(x = eleicao, y = lancamentos))+
-  geom_col()+
-  geom_text(aes(label = lancamentos), position = position_stack(vjust = 0.5))+
+  geom_col(fill = "#41A1C8")+
+  geom_text(aes(label = lancamentos),size = 5,color = "white",fontface = "bold" ,position = position_stack(vjust = 0.5))+
   theme_minimal()+
-  labs(x = NULL, y = NULL, title = "Quantitade de estações inauguradas por Eleições", subtitle = "Há relação entre as inaugurações e ano de eleição ?")+
+  labs(x = NULL, y = NULL)+
   theme(plot.title = element_text(hjust = 0.5, vjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5, vjust = 0.5),
-        axis.text.y = element_blank())
+        axis.text.y = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
 
 
 # # 3. GGANIMATE
+
+
+
 
 
 

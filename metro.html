@@ -8,7 +8,7 @@
 
 <meta name="author" content="Caio Martins">
 
-<title>Evolução das inaugurações de Metrô em SP</title>
+<title>Evolução da Rede de Metrô em SP com um GIF</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,6 +34,49 @@ ul.task-list li input[type="checkbox"] {
 <script src="metro_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="metro_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="metro_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="metro_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="metro_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="metro_files/libs/proj4js-2.3.15/proj4.js"></script>
+<link href="metro_files/libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
+<script src="metro_files/libs/highcharts-9.3.1/highcharts.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/highcharts-3d.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/highcharts-more.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/stock.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/map.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/data.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/exporting.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/offline-exporting.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/drilldown.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/item-series.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/annotations.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/export-data.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/funnel.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/heatmap.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/treemap.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/sankey.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/dependency-wheel.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/organization.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/solid-gauge.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/streamgraph.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/sunburst.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/vector.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/wordcloud.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/xrange.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/tilemap.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/venn.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/gantt.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/timeline.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/bullet.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/coloraxis.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/dumbbell.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/lollipop.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/series-label.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/plugins/motion.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/custom/reset.js"></script>
+<script src="metro_files/libs/highcharts-9.3.1/modules/boost.js"></script>
+<script src="metro_files/libs/highchart-binding-0.9.4/highchart.js"></script>
 
 
 </head>
@@ -46,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Evolução das inaugurações de Metrô em SP</h1>
+<h1 class="title">Evolução da Rede de Metrô em SP com um GIF</h1>
 </div>
 
 
@@ -67,29 +110,58 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introdução" class="level2">
-<h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
-<p>Recentemente deparei-me no twitter com uma publicação que mostrava o comparativo da extensão metroviária entre duas cidades. O objetivo da publicação era demonstrar como uma das cidades desenvolveu o dobro de extensão da rede metroviária da primeira cidade em um menor intervalo de tempo. Não lembro muito bem quais eram as cidades, mas acredito que uma delas era Seul, a capital da Coréia do Sul.</p>
-<p>Junto a isso, relembrei de um post do cientista de dados Sillas Gonzaga em que <a href="http://sillasgonzaga.com/post/mapeando-a-abertura-de-escolas-municipais-em-sao-paulo-ao-longo-dos-anos/">mapeava a abertura das escolas municipais em SP com um GIF</a>. A junção das duas coisas trouxe-me a ideia: por que não fazer o mesmo com as estações de metrô ?</p>
-<p>O mapeamento das escolas é uma questão obviamente mais pertinente, afinal, será que o governo prioriza a inauguração das escolas em áreas com déficit de vagas ? Será que prioriza a inauguração das escolas em áreas menos centrais ?</p>
-<p>É evidente que no caso do metrô todos conhecem a localização das estações (é redundante, afinal o nome já indica!). Mas não deixa de ser curioso poder visualizar em um GIF a evolução das estações de metrô na cidade de SP.</p>
-<p>Portanto, este artigo irá mostrar a evolução das inaugurações de metrô em SP em um GIF.</p>
-<p>Também pretendo responder algumas perguntas! A cada ciclo eleitoral reaparece nos jornais alguma notícia de que o governo inaugurou uma série de estações/projetos em ano eleitoral, ou as vésperas de uma eleição. Segundo reportagem noticiada pelo UOL em 2014, <a href="#0">tucanos inauguram 79% das estações de metrô em ano eleitoral</a>.</p>
-<p>Quantas estações foram inauguradas em ano de eleição ? Quantas estações foram inauguradas em ano de eleição no governo PSDB ?</p>
+<section id="introdução" class="level2" style="text-align:center">
+<h2 style="text-align:center" class="anchored" data-anchor-id="introdução">Introdução</h2>
+<p>Recentemente deparei-me no twitter com uma publicação que mostrava a evolução da extensão metroviária entre duas cidades. O objetivo da publicação era demonstrar como uma das cidades desenvolveu o dobro de extensão da rede metroviária em um menor intervalo de tempo. Não lembro muito bem quais eram as cidades, mas acredito que uma delas era Seul, a capital da Coreia do Sul.</p>
+<p>Junto a isso, relembrei de um post do cientista de dados Sillas Gonzaga em que <a href="#0">mapeava a abertura das escolas municipais em SP com um GIF</a>. A junção das duas coisas trouxe-me a ideia: por que não fazer o mesmo com as estações de metrô na cidade de SP ?!</p>
+<p>O mapeamento das escolas é uma questão mais pertinente, afinal, será que o governo prioriza a abertura de escolas em áreas com déficit de vagas ou em áreas menos centrais ?</p>
+<p>É evidente que no caso do metrô todos conhecem a localização das estações (o próprio nome já indica). Mas não deixa de ser curioso poder visualizar em um GIF a evolução da rede metroviária na cidade de SP.</p>
+<p>Portanto, este artigo irá mostrar a evolução da rede metroviária na cidade de SP com um GIF.</p>
+<p>Além disso, pretendo responder algumas perguntas! A cada ciclo eleitoral reaparece nos jornais alguma notícia de que o governo inaugurou uma série de estações/projetos em ano eleitoral, ou as vésperas de uma eleição. Segundo reportagem noticiada pelo UOL em 2014, os <a href="#0">tucanos inauguram 79% das estações de metrô em ano eleitoral</a>.</p>
+<p>Quantas estações foram inauguradas em ano eleitoral no governo PSDB(1994-2022) no estado de São Paulo?</p>
 </section>
-<section id="metodologia" class="level2">
-<h2 class="anchored" data-anchor-id="metodologia">Metodologia</h2>
+<section id="metodologia" class="level2" style="text-align:center">
+<h2 style="text-align:center" class="anchored" data-anchor-id="metodologia">Metodologia</h2>
 <p>Para mapear a evolução das inaugurações das estações de metrô é necessário ter em mãos não só o ano da inauguração, como também o endereço das estações.</p>
-<p>Confesso que não encontrei em dados públicos do governo ambas as informações. A solução utilizada aqui foi raspar as informações do site do Wikipedia. O Wikipedia tem uma página que mostra <a href="https://pt.wikipedia.org/wiki/Categoria:Estações_do_Metrô_de_São_Paulo">todas as estações</a>, até mesmo futuras, da cidade de São Paulo. Fiz um Scrapper pra coletar o nome dessas estações, o link da página de cada estação, a data de inauguração e o endereço. Não irei explicar nem demonstrar aqui como fazer isso, mas caso queira dar uma olhada pode acessar o repositório no Github.</p>
+<p>Confesso que não encontrei em dados públicos ambas as informações. A solução utilizada aqui foi raspar as informações no site do Wikipedia. O Wikipedia tem uma página que mostra <a href="https://pt.wikipedia.org/wiki/Categoria:Estações_do_Metrô_de_São_Paulo">todas as estações</a> da cidade de São Paulo. Fiz um Scrapper pra coletar o nome dessas estações, o link da página de cada estação, a data de inauguração e o endereço. Não irei explicar nem demonstrar aqui como fazer isso, mas caso queira dar uma olhada basta acessar o meu repositório no Github.</p>
 <p>Todo o processo desde a raspagem de dados até a plotagem foi feita utilizando o R e suas dependências.</p>
+<p>Disclaimer: somente após terminar este ‘artigo’ que descobri que o <a href="https://centrodametropole.fflch.usp.br/pt-br">CEM (Centro de Estudos da Métropole)</a> disponibiliza dados referentes as estações de metrô/CPTM.</p>
+<p><strong>Atenção: o GIF da evolução da rede metroviária de SP segue a ordem de inauguração das estações com base no ano. No entanto, é importante notar que, dentro do mesmo ano, a sequência das estações pode não refletir sua cronologia exata de lançamento ao longo do ano. Portanto, a ordem de aparição das estações no GIF é baseado exclusivamente no ano de inauguração, o que pode não representar a ordem exata de lançamento ao longo desse período, pois não estou considerando dia/mês.</strong></p>
 </section>
-<section id="análise-espacial" class="level2">
-<h2 class="anchored" data-anchor-id="análise-espacial">Análise Espacial</h2>
+<section id="inaugurações-das-estações-de-metrô-em-um-gif" class="level2" style="text-align:center">
+<h2 style="text-align:center" class="anchored" data-anchor-id="inaugurações-das-estações-de-metrô-em-um-gif">Inaugurações das Estações de metrô em um GIF</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="metro_files/figure-html/unnamed-chunk-1-1.gif" class="img-fluid"></p>
 </div>
 </div>
+<p>Podemos verificar pelo GIF que há regiões na cidade de SP que ainda não possuem cobertura da rede metroviária.</p>
+<p><em>Está em andamento inicial a linha 6 laranja que ligará Brasilância, Zona Norte, com o Centro de São Paulo. Esta linha irá cobrir regiões de Perdizes, Pompeia, Freguesia do Ó… regiões que ainda não possuem cobertura da rede metroviária.</em></p>
+<section id="quantidade-de-estações-de-metrô-inauguradas-por-ano" class="level4" style="text-align: center">
+<h4 style="text-align: center" class="anchored" data-anchor-id="quantidade-de-estações-de-metrô-inauguradas-por-ano">Quantidade de estações de metrô inauguradas por ano</h4>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0612628166d9d00ba668" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-0612628166d9d00ba668">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":""},"type":"linear","labels":{"visible":false}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"column":{"pointWidth":14}},"series":[{"group":"group","data":[{"ANO_FINAL":1974,"n":7,"x":1974,"y":7},{"ANO_FINAL":1975,"n":12,"x":1975,"y":12},{"ANO_FINAL":1978,"n":2,"x":1978,"y":2},{"ANO_FINAL":1979,"n":1,"x":1979,"y":1},{"ANO_FINAL":1980,"n":2,"x":1980,"y":2},{"ANO_FINAL":1981,"n":2,"x":1981,"y":2},{"ANO_FINAL":1982,"n":1,"x":1982,"y":1},{"ANO_FINAL":1983,"n":2,"x":1983,"y":2},{"ANO_FINAL":1986,"n":2,"x":1986,"y":2},{"ANO_FINAL":1988,"n":7,"x":1988,"y":7},{"ANO_FINAL":1991,"n":4,"x":1991,"y":4},{"ANO_FINAL":1992,"n":2,"x":1992,"y":2},{"ANO_FINAL":1998,"n":5,"x":1998,"y":5},{"ANO_FINAL":2002,"n":6,"x":2002,"y":6},{"ANO_FINAL":2006,"n":2,"x":2006,"y":2},{"ANO_FINAL":2007,"n":1,"x":2007,"y":1},{"ANO_FINAL":2010,"n":5,"x":2010,"y":5},{"ANO_FINAL":2011,"n":4,"x":2011,"y":4},{"ANO_FINAL":2014,"n":4,"x":2014,"y":4},{"ANO_FINAL":2017,"n":3,"x":2017,"y":3},{"ANO_FINAL":2018,"n":13,"x":2018,"y":13},{"ANO_FINAL":2019,"n":5,"x":2019,"y":5},{"ANO_FINAL":2021,"n":2,"x":2021,"y":2}],"type":"column","name":"Nº de Estações inauguradas"}],"xAxis":{"type":"linear","title":{"text":""},"labels":{"visible":false},"tickInterval":1}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Houve 17 inaugurações de estações somente no ano de 2018. Certamente um ano atípico quando comparado com anos anteriores.</p>
+</section>
+<section id="existe-alguma-relação-entre-o-ciclo-eleitoral-e-inauguração-das-estações-de-metrô" class="level4" style="text-align:center">
+<h4 style="text-align:center" class="anchored" data-anchor-id="existe-alguma-relação-entre-o-ciclo-eleitoral-e-inauguração-das-estações-de-metrô">Existe alguma relação entre o ciclo eleitoral e inauguração das estações de metrô ?</h4>
+<p>Com alguma frequência é noticiado que diversas obras públicas de grande impacto são inauguradas nas vésperas de uma eleição. Entenda por “vésperas” como o período compreendendo até 1 ano antes das eleições. Segundo a Folha de SP, <a href="https://agora.folha.uol.com.br/sao-paulo/2021/09/as-vespera-de-ano-eleitoral-governo-doria-inaugura-pacotao-de-estacoes-do-metro-e-da-cptm.shtml">o governo João Dória(PSDB) tem intensificado o ritmo de entregas de obras atrasadas do metrô e da CPTM às vésperas de ano eleitoral</a>. O UOL também noticiou em 2014 que <a href="https://www.uol.com.br/eleicoes/2014/noticias/2014/08/01/em-sp-tucanos-inauguram-79-das-estacoes-de-metro-em-ano-eleitoral.htm">em SP os tucanos inauguram 79% das estações de metrô em ano eleitoral</a>.</p>
+<p>Será que durante o governo PSDB em SP(1994-2022) apresenta uma relação expressiva entre inaugurações e ano eleitoral ? Será que o governo PSDB priorizou a inauguração de inúmeras estações em ano eleitoral ? Abaixo um gráfico de barras com a quantidade de estações de metrô inauguradas em ano eleitoral e não ano eleitoral.</p>
+<pre><code></code></pre>
+</section>
+<section id="quantidade-de-estações-inauguradas-por-período-eleitoral-no-governo-psdb1994-2022" class="level4" style="text-align:center">
+<h4 style="text-align:center" class="anchored" data-anchor-id="quantidade-de-estações-inauguradas-por-período-eleitoral-no-governo-psdb1994-2022">Quantidade de estações inauguradas por período eleitoral no governo PSDB(1994-2022)</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="metro_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
 </section>
 
 </main>

@@ -1,35 +1,39 @@
 ---
-title: "Evolução das inaugurações de Metrô em SP "
+title: "Evolução da Rede de Metrô em SP com um GIF "
 author: "Caio Martins"
 format: html
 editor: visual
 ---
 
-## Introdução
+## Introdução {style="text-align:center"}
 
-Recentemente deparei-me no twitter com uma publicação que mostrava o comparativo da extensão metroviária entre duas cidades. O objetivo da publicação era demonstrar como uma das cidades desenvolveu o dobro de extensão da rede metroviária da primeira cidade em um menor intervalo de tempo. Não lembro muito bem quais eram as cidades, mas acredito que uma delas era Seul, a capital da Coréia do Sul.
+Recentemente deparei-me no twitter com uma publicação que mostrava a evolução da extensão metroviária entre duas cidades. O objetivo da publicação era demonstrar como uma das cidades desenvolveu o dobro de extensão da rede metroviária em um menor intervalo de tempo. Não lembro muito bem quais eram as cidades, mas acredito que uma delas era Seul, a capital da Coreia do Sul.
 
-Junto a isso, relembrei de um post do cientista de dados Sillas Gonzaga em que [mapeava a abertura das escolas municipais em SP com um GIF](http://sillasgonzaga.com/post/mapeando-a-abertura-de-escolas-municipais-em-sao-paulo-ao-longo-dos-anos/). A junção das duas coisas trouxe-me a ideia: por que não fazer o mesmo com as estações de metrô ?
+Junto a isso, relembrei de um post do cientista de dados Sillas Gonzaga em que [mapeava a abertura das escolas municipais em SP com um GIF](#0). A junção das duas coisas trouxe-me a ideia: por que não fazer o mesmo com as estações de metrô na cidade de SP ?!
 
-O mapeamento das escolas é uma questão obviamente mais pertinente, afinal, será que o governo prioriza a inauguração das escolas em áreas com déficit de vagas ? Será que prioriza a inauguração das escolas em áreas menos centrais ?
+O mapeamento das escolas é uma questão mais pertinente, afinal, será que o governo prioriza a abertura de escolas em áreas com déficit de vagas ou em áreas menos centrais ?
 
-É evidente que no caso do metrô todos conhecem a localização das estações (é redundante, afinal o nome já indica!). Mas não deixa de ser curioso poder visualizar em um GIF a evolução das estações de metrô na cidade de SP.
+É evidente que no caso do metrô todos conhecem a localização das estações (o próprio nome já indica). Mas não deixa de ser curioso poder visualizar em um GIF a evolução da rede metroviária na cidade de SP.
 
-Portanto, este artigo irá mostrar a evolução das inaugurações de metrô em SP em um GIF.
+Portanto, este artigo irá mostrar a evolução da rede metroviária na cidade de SP com um GIF.
 
-Também pretendo responder algumas perguntas! A cada ciclo eleitoral reaparece nos jornais alguma notícia de que o governo inaugurou uma série de estações/projetos em ano eleitoral, ou as vésperas de uma eleição. Segundo reportagem noticiada pelo UOL em 2014, [tucanos inauguram 79% das estações de metrô em ano eleitoral](#0).
+Além disso, pretendo responder algumas perguntas! A cada ciclo eleitoral reaparece nos jornais alguma notícia de que o governo inaugurou uma série de estações/projetos em ano eleitoral, ou as vésperas de uma eleição. Segundo reportagem noticiada pelo UOL em 2014, os [tucanos inauguram 79% das estações de metrô em ano eleitoral](#0).
 
-Quantas estações foram inauguradas em ano de eleição ? Quantas estações foram inauguradas em ano de eleição no governo PSDB ?
+Quantas estações foram inauguradas em ano eleitoral no governo PSDB(1994-2022) no estado de São Paulo?
 
-## Metodologia
+## Metodologia {style="text-align:center"}
 
 Para mapear a evolução das inaugurações das estações de metrô é necessário ter em mãos não só o ano da inauguração, como também o endereço das estações.
 
-Confesso que não encontrei em dados públicos do governo ambas as informações. A solução utilizada aqui foi raspar as informações do site do Wikipedia. O Wikipedia tem uma página que mostra [todas as estações](https://pt.wikipedia.org/wiki/Categoria:Estações_do_Metrô_de_São_Paulo), até mesmo futuras, da cidade de São Paulo. Fiz um Scrapper pra coletar o nome dessas estações, o link da página de cada estação, a data de inauguração e o endereço. Não irei explicar nem demonstrar aqui como fazer isso, mas caso queira dar uma olhada pode acessar o repositório no Github.
+Confesso que não encontrei em dados públicos ambas as informações. A solução utilizada aqui foi raspar as informações no site do Wikipedia. O Wikipedia tem uma página que mostra [todas as estações](https://pt.wikipedia.org/wiki/Categoria:Estações_do_Metrô_de_São_Paulo) da cidade de São Paulo. Fiz um Scrapper pra coletar o nome dessas estações, o link da página de cada estação, a data de inauguração e o endereço. Não irei explicar nem demonstrar aqui como fazer isso, mas caso queira dar uma olhada basta acessar o meu repositório no Github.
 
 Todo o processo desde a raspagem de dados até a plotagem foi feita utilizando o R e suas dependências.
 
-## Análise Espacial
+Disclaimer: somente após terminar este 'artigo' que descobri que o [CEM (Centro de Estudos da Métropole)](https://centrodametropole.fflch.usp.br/pt-br) disponibiliza dados referentes as estações de metrô/CPTM.
+
+**Atenção: o GIF da evolução da rede metroviária de SP segue a ordem de inauguração das estações com base no ano. No entanto, é importante notar que, dentro do mesmo ano, a sequência das estações pode não refletir sua cronologia exata de lançamento ao longo do ano. Portanto, a ordem de aparição das estações no GIF é baseado exclusivamente no ano de inauguração, o que pode não representar a ordem exata de lançamento ao longo desse período, pois não estou considerando dia/mês.**
+
+## Inaugurações das Estações de metrô em um GIF {style="text-align:center"}
 
 ```{r, echo=FALSE, warning=FALSE,message=FALSE}
 
@@ -43,11 +47,18 @@ library(forcats)
 library(OpenStreetMap)
 library(latex2exp)
 
-lat_longs <- read_csv2("C:\\Users\\Caio\\Desktop\\Projeto Metro SP\\dados_prontosQUARTO.csv")
+
+#lat_longs <- read_csv2("C:\\Users\\Caio\\Desktop\\Projeto Metro SP\\dados_prontosQUARTO_2.csv")
+
+lat_longs <- readxl::read_xls("C:\\Users\\Caio\\Desktop\\Projeto Metro SP\\dados_finais_QUARTO3.xls")
 
 
-upperLeft <- c(-23.4190,-46.8058)
-lowerRight <- c(-23.7327,-46.4527)
+
+
+
+
+upperLeft <- c(-23.4490,-46.8258)
+lowerRight <- c(-23.7127,-46.4327)
 
 map <- openmap(upperLeft=upperLeft,
                lowerRight=lowerRight,
@@ -59,21 +70,41 @@ map2 <- openproj(map)
 
 
 
-lat_longs$id_estacao <- paste(lat_longs$ano, lat_longs$Estacao)
+lat_longs$id_estacao <- paste(lat_longs$ANO_FINAL,"|",lat_longs$Estacao,"|","Linha:",lat_longs$COR_LIN)
+
+
+#caption_line1 <- TeX("Feito por Caio Martins")
+#caption_line2 <- TeX("Twitter: @Mcaio3")
+#caption_line3 <- TeX("Github: martinscaio")
+
+
+
+
+lat_longs <- lat_longs %>%
+  mutate(linha = case_when(
+    NM_LIN == 1 ~ "Linha 1",
+    NM_LIN == 2 ~ "Linha 2",
+    NM_LIN == 3 ~ "Linha 3",
+    NM_LIN == 4 ~ "Linha 4",
+    NM_LIN == 5 ~ "Linha 5",
+    NM_LIN == 15 ~ "Linha 15",
+    TRUE ~ "LINHAINEXISTENTE"  # Defina uma cor padrão para casos não correspondentes
+  ))
 
 
 
 # scale 3 zoom 13
 mapa_osm <- OpenStreetMap::autoplot.OpenStreetMap(map2, scale = 3, zoom = 13) +
-  geom_point(data = lat_longs,aes(x = lon, y = lat, group = id_estacao),
-             alpha = 0.6,
-             size = 5,
-             color = '#6260EE')+
+  geom_point(data = lat_longs,aes(x = lon, y = lat, color = linha),
+             alpha = 0.9,
+             size = 5)+
+  scale_color_manual(values = c("Linha 1" = "#0e539e", "Linha 2" = "#217f62", "Linha 3" = "#e7483c", "Linha 4" = "#fcd43a", "Linha 5" = "#76509c", "Linha 15" = "#868d90"))+
   labs(
     title = "",
     subtitle = "Ano: {next_state}",
     x= "",
-    y= "") +
+    y= "")+
+    #caption = paste(caption_line1, caption_line2, caption_line3, sep = "\n")) +
   cowplot::theme_cowplot(font_family = "Source Sans Pro",
                          font_size = 12) +
   theme(legend.position = "none",
@@ -82,15 +113,81 @@ mapa_osm <- OpenStreetMap::autoplot.OpenStreetMap(map2, scale = 3, zoom = 13) +
         plot.subtitle = element_text(size = 22, hjust = 0.5),
         plot.margin = margin(5, 5, 5, 5),
         axis.text = element_blank()) +
-  transition_states(id_estacao) +
+  transition_states(id_estacao,
+                    transition_length = 2,
+                    state_length = 1) +
   ease_aes('linear')+
-  shadow_mark(color="black")
+  shadow_mark()
 
 
 
 
 animate(mapa_osm, fps = 1,height = 3500, width = 3500,res = 250, renderer = gifski_renderer("metro.gif"))
 
+```
+
+Podemos verificar pelo GIF que há regiões na cidade de SP que ainda não possuem cobertura da rede metroviária.
+
+*Está em andamento inicial a linha 6 laranja que ligará Brasilância, Zona Norte, com o Centro de São Paulo. Esta linha irá cobrir regiões de Perdizes, Pompeia, Freguesia do Ó... regiões que ainda não possuem cobertura da rede metroviária.*
+
+#### Quantidade de estações de metrô inauguradas por ano {style="text-align: center"}
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE}
+
+library(highcharter)
+
+lat_longs %>% 
+  group_by(ANO_FINAL) %>% 
+  count() %>% 
+  hchart('column', hcaes(x = 'ANO_FINAL', y = 'n'), name = "Nº de Estações inauguradas") %>% 
+  hc_xAxis(title = list(text = ""), labels = list(visible = FALSE), tickInterval = 1) %>% 
+  hc_yAxis(title = list(text = ""), labels = list(visible = FALSE)) %>% 
+  hc_plotOptions(column = list(pointWidth = 14))
+
+
+
+```
+
+Houve 17 inaugurações de estações somente no ano de 2018. Certamente um ano atípico quando comparado com anos anteriores.
+
+#### Existe alguma relação entre o ciclo eleitoral e inauguração das estações de metrô ? {style="text-align:center"}
+
+Com alguma frequência é noticiado que diversas obras públicas de grande impacto são inauguradas nas vésperas de uma eleição. Entenda por "vésperas" como o período compreendendo até 1 ano antes das eleições. Segundo a Folha de SP, [o governo João Dória(PSDB) tem intensificado o ritmo de entregas de obras atrasadas do metrô e da CPTM às vésperas de ano eleitoral](https://agora.folha.uol.com.br/sao-paulo/2021/09/as-vespera-de-ano-eleitoral-governo-doria-inaugura-pacotao-de-estacoes-do-metro-e-da-cptm.shtml). O UOL também noticiou em 2014 que [em SP os tucanos inauguram 79% das estações de metrô em ano eleitoral](https://www.uol.com.br/eleicoes/2014/noticias/2014/08/01/em-sp-tucanos-inauguram-79-das-estacoes-de-metro-em-ano-eleitoral.htm).
+
+Será que durante o governo PSDB em SP(1994-2022) apresenta uma relação expressiva entre inaugurações e ano eleitoral ? Será que o governo PSDB priorizou a inauguração de inúmeras estações em ano eleitoral ? Abaixo um gráfico de barras com a quantidade de estações de metrô inauguradas em ano eleitoral e não ano eleitoral.
+
+```         
+```
+
+#### Quantidade de estações inauguradas por período eleitoral no governo PSDB(1994-2022) {style="text-align:center"}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+
+
+eleicoes_estaduais <- c(1974,1978,1982,1986,1990,1994,1998,2002,2006,2010,2014,2018,2022)
+
+dados_eleicoes <- lat_longs %>% 
+  group_by(INICIO) %>% 
+  count() %>% 
+  arrange(desc(n)) %>% 
+  mutate(eleicao = ifelse(INICIO %in% eleicoes_estaduais, 'Ano de Eleição','Não é ano de Eleição'))
+
+
+dados_eleicoes %>% 
+  filter(INICIO >= 1994) %>% 
+  group_by(eleicao) %>% 
+  summarise(lancamentos = sum(n)) %>% 
+  ggplot(aes(x = eleicao, y = lancamentos))+
+  geom_col(fill = "#41A1C8")+
+  geom_text(aes(label = lancamentos),size = 5,color = "white",fontface = "bold" ,position = position_stack(vjust = 0.5))+
+  theme_minimal()+
+  labs(x = NULL, y = NULL)+
+  theme(plot.title = element_text(hjust = 0.5, vjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
 
 ```
