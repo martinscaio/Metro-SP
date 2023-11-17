@@ -214,7 +214,3 @@ mapa_osm <- OpenStreetMap::autoplot.OpenStreetMap(map2, scale = 3, zoom = 13) +
 
 gif <- animate(mapa_osm, fps = 1,height = 1600, width = 1600,res = 150, renderer = gifski_renderer("metro.gif"))
 
-
-anim_save("metro.gif", gif)
-
-
