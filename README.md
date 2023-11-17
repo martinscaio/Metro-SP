@@ -4,7 +4,7 @@
 
 Recentemente deparei-me no twitter com uma publicação que mostrava a evolução da extensão metroviária entre duas cidades. O objetivo da publicação era demonstrar como uma das cidades desenvolveu o dobro de extensão da rede metroviária em um menor intervalo de tempo. Não lembro muito bem quais eram as cidades, mas acredito que uma delas era Seul, a capital da Coreia do Sul.
 
-Junto a isso, relembrei de um post do cientista de dados Sillas Gonzaga em que [mapeava a abertura das escolas municipais em SP com um GIF]([sillasgonzaga.com/post/mapeando-a-abertura-de-escolas-municipais-em-sao-paulo-ao-longo-dos-anos/](https://www.sillasgonzaga.com/post/mapeando-a-abertura-de-escolas-municipais-em-sao-paulo-ao-longo-dos-anos/)). A junção das duas coisas trouxe-me a ideia: por que não fazer o mesmo com as estações de metrô na cidade de SP ?!
+Junto a isso, relembrei de um post do cientista de dados Sillas Gonzaga em que [mapeava a abertura das escolas municipais em SP com um GIF](https://www.sillasgonzaga.com/post/mapeando-a-abertura-de-escolas-municipais-em-sao-paulo-ao-longo-dos-anos/). A junção das duas coisas trouxe-me a ideia: por que não fazer o mesmo com as estações de metrô na cidade de SP ?!
 
 O mapeamento das escolas é uma questão mais pertinente, afinal, será que o governo prioriza a abertura de escolas em áreas com déficit de vagas ou em áreas menos centrais ?
 
