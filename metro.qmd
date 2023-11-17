@@ -191,3 +191,9 @@ dados_eleicoes %>%
 
 
 ```
+
+De fato, há uma predominância das inaugurações das estações em anos eleitorais. Muito provavelmente uma escolha política para manter vivo o feito na memória do eleitor. Obras públicas entregues no início de mandato podem ser esquecidas pelo eleitor no momento eleitoral.
+
+É isso!! Caso queira conhecer outros projetos - ou entrar em contato - basta acessar meu [Portfolio](https://www.caiomartins.netlify.app) ou [Github](https://www.github.com/martinscaio).
+
+Obrigado!
