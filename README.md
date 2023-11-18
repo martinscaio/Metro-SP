@@ -1,5 +1,7 @@
 # Metro-SP
 
+Para ver o projeto completo basta clicar [aqui](https://metrosp.netlify.app)
+
 ## Mapeando as aberturas das estações de metrô em SP com um GIF
 
 Recentemente deparei-me no twitter com uma publicação que mostrava a evolução da extensão metroviária entre duas cidades. O objetivo da publicação era demonstrar como uma das cidades desenvolveu o dobro de extensão da rede metroviária em um menor intervalo de tempo. Não lembro muito bem quais eram as cidades, mas acredito que uma delas era Seul, a capital da Coreia do Sul.
